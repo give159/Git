@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git用語集 - Excelダウンロード</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .download-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            margin: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-excel {
+            background: linear-gradient(135deg, #1e7e34 0%, #28a745 100%);
+            color: white;
+        }
+
+        .btn-excel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-csv {
+            background: linear-gradient(135deg, #004085 0%, #007bff 100%);
+            color: white;
+        }
+
+        .btn-csv:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .preview {
+            margin-top: 30px;
+        }
+
+        .preview h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .category {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Git用語集</h1>
+            <p>完全版 - Excel/CSVダウンロード対応</p>
+        </div>
+
+        <div class="content">
+            <div class="download-section">
+                <h2 style="margin-bottom: 20px; color: #333;">💾 ダウンロード</h2>
+                <button class="btn btn-excel" onclick="exportToExcel()">
+                    📗 Excelでダウンロード (.xlsx形式)
+                </button>
+                <button class="btn btn-csv" onclick="exportToCSV()">
+                    📄 CSVでダウンロード (.csv形式)
+                </button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>150+</h3>
+                    <p>用語数</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <h3>8</h3>
+                    <p>カテゴリ</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                    <h3>100%</h3>
+                    <p>実務対応</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>📌 この用語集について</h3>
+                <p>Git開発で使用される重要な用語を網羅的にまとめました。初心者から上級者まで、実務で役立つ内容です。</p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>基本概念から高度な機能まで</li>
+                    <li>実際のコマンド例付き</li>
+                    <li>日英対応表も含む</li>
+                </ul>
+            </div>
+
+            <div class="preview">
+                <h2>📋 プレビュー</h2>
+                <div class="table-container">
+                    <table id="gitTermsTable">
+                        <thead>
+                            <tr>
+                                <th>カテゴリ</th>
+                                <th>用語（日本語）</th>
+                                <th>用語（英語）</th>
+                                <th>説明</th>
+                                <th>コマンド例</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        const gitTermsData = [
+            // 基本概念
+            { category: '基本概念', termJa: 'リポジトリ', termEn: 'Repository', description: 'プロジェクトの履歴を保存する場所', command: 'git init' },
+            { category: '基本概念', termJa: 'ローカルリポジトリ', termEn: 'Local Repository', description: '自分のPC上のリポジトリ', command: '開発作業はローカルで行う' },
+            { category: '基本概念', termJa: 'リモートリポジトリ', termEn: 'Remote Repository', description: 'サーバー上の共有リポジトリ', command: 'GitHub, GitLabなど' },
+            { category: '基本概念', termJa: 'クローン', termEn: 'Clone', description: 'リモートリポジトリをローカルにコピー', command: 'git clone <URL>' },
+            { category: '基本概念', termJa: 'ワークツリー', termEn: 'Working Tree', description: '実際にファイルを編集する作業領域', command: 'エディタで編集する場所' },
+            { category: '基本概念', termJa: 'ステージングエリア', termEn: 'Staging Area / Index', description: 'コミット前の準備領域', command: 'git add' },
+            
+            // リポジトリ関連
+            { category: 'リポジトリ関連', termJa: '初期化', termEn: 'Initialize', description: '新しいGitリポジトリを作成', command: 'git init' },
+            { category: 'リポジトリ関連', termJa: 'フォーク', termEn: 'Fork', description: '他人のリポジトリを自分のアカウントにコピー', command: 'GitHub上でボタンクリック' },
+            { category: 'リポジトリ関連', termJa: 'オリジン', termEn: 'Origin', description: 'デフォルトのリモートリポジトリ名', command: 'git remote add origin <URL>' },
+            { category: 'リポジトリ関連', termJa: 'アップストリーム', termEn: 'Upstream', description: 'フォーク元のリポジトリ', command: 'git remote add upstream <URL>' },
+            
+            // ブランチ関連
+            { category: 'ブランチ関連', termJa: 'ブランチ', termEn: 'Branch', description: '開発の枝分かれ', command: 'git branch feature-login' },
+            { category: 'ブランチ関連', termJa: 'メインブランチ', termEn: 'Main Branch', description: '本番環境のコード（旧master）', command: 'main または master' },
+            { category: 'ブランチ関連', termJa: '開発ブランチ', termEn: 'Development Branch', description: '開発用のブランチ', command: 'develop' },
+            { category: 'ブランチ関連', termJa: 'フィーチャーブランチ', termEn: 'Feature Branch', description: '新機能開発用のブランチ', command: 'feature/user-auth' },
+            { category: 'ブランチ関連', termJa: 'バグ修正ブランチ', termEn: 'Bugfix Branch', description: 'バグ修正用', command: 'bugfix/login-error' },
+            { category: 'ブランチ関連', termJa: 'ホットフィックスブランチ', termEn: 'Hotfix Branch', description: '緊急修正用', command: 'hotfix/security-patch' },
+            { category: 'ブランチ関連', termJa: 'リリースブランチ', termEn: 'Release Branch', description: 'リリース準備用', command: 'release/v1.2.0' },
+            { category: 'ブランチ関連', termJa: 'トピックブランチ', termEn: 'Topic Branch', description: '特定の作業用ブランチの総称', command: '-' },
+            { category: 'ブランチ関連', termJa: '作業ブランチ', termEn: 'Working Branch', description: '現在作業中のブランチ', command: 'git branch' },
+            { category: 'ブランチ関連', termJa: 'デフォルトブランチ', termEn: 'Default Branch', description: 'リポジトリの基準となるブランチ', command: '通常はmain' },
+            
+            // コミット関連
+            { category: 'コミット関連', termJa: 'コミット', termEn: 'Commit', description: '変更を記録する', command: 'git commit -m "メッセージ"' },
+            { category: 'コミット関連', termJa: 'コミットメッセージ', termEn: 'Commit Message', description: 'コミットの説明文', command: 'git commit -m "Add login feature"' },
+            { category: 'コミット関連', termJa: 'コミットハッシュ', termEn: 'Commit Hash / SHA', description: 'コミットを識別する一意のID', command: 'a3f5b21...' },
+            { category: 'コミット関連', termJa: 'HEAD', termEn: 'HEAD', description: '現在のコミット位置を指すポインタ', command: 'git log HEAD' },
+            { category: 'コミット関連', termJa: 'スナップショット', termEn: 'Snapshot', description: 'ある時点のファイル状態', command: 'コミット時に作成される' },
+            { category: 'コミット関連', termJa: '修正コミット', termEn: 'Amend', description: '直前のコミットを修正', command: 'git commit --amend' },
+            
+            // リモート操作
+            { category: 'リモート操作', termJa: 'プッシュ', termEn: 'Push', description: 'ローカルの変更をリモートへ送信', command: 'git push origin main' },
+            { category: 'リモート操作', termJa: 'プル', termEn: 'Pull', description: 'リモートの変更をローカルへ取得・統合', command: 'git pull origin main' },
+            { category: 'リモート操作', termJa: 'フェッチ', termEn: 'Fetch', description: 'リモートの変更を取得（統合しない）', command: 'git fetch origin' },
+            { category: 'リモート操作', termJa: 'リモート', termEn: 'Remote', description: 'リモートリポジトリの接続設定', command: 'git remote -v' },
+            { category: 'リモート操作', termJa: 'プルリクエスト', termEn: 'Pull Request (PR)', description: 'コードレビュー・統合の依頼', command: 'GitHub/GitLab上で作成' },
+            { category: 'リモート操作', termJa: 'マージリクエスト', termEn: 'Merge Request (MR)', description: 'プルリクエストのGitLab用語', command: 'GitLab上で作成' },
+            
+            // マージ・統合
+            { category: 'マージ・統合', termJa: 'マージ', termEn: 'Merge', description: 'ブランチを統合', command: 'git merge feature-branch' },
+            { category: 'マージ・統合', termJa: 'ファストフォワード', termEn: 'Fast-forward', description: '直線的なマージ', command: 'git merge --ff' },
+            { category: 'マージ・統合', termJa: 'マージコミット', termEn: 'Merge Commit', description: 'マージ時に作成されるコミット', command: '自動生成' },
+            { category: 'マージ・統合', termJa: 'リベース', termEn: 'Rebase', description: 'コミット履歴を書き換えて統合', command: 'git rebase main' },
+            { category: 'マージ・統合', termJa: 'スカッシュ', termEn: 'Squash', description: '複数コミットを1つにまとめる', command: 'git rebase -i HEAD~3' },
+            { category: 'マージ・統合', termJa: 'チェリーピック', termEn: 'Cherry-pick', description: '特定のコミットだけを取り込む', command: 'git cherry-pick a3f5b21' },
+            { category: 'マージ・統合', termJa: 'コンフリクト', termEn: 'Conflict', description: 'マージ時の衝突', command: '手動で解決が必要' },
+            { category: 'マージ・統合', termJa: 'コンフリクト解決', termEn: 'Conflict Resolution', description: '衝突の解決作業', command: 'ファイルを編集して解決' },
+            
+            // 作業状態
+            { category: '作業状態', termJa: '追跡中', termEn: 'Tracked', description: 'Gitが管理しているファイル', command: 'git status で確認' },
+            { category: '作業状態', termJa: '未追跡', termEn: 'Untracked', description: 'Gitが管理していない新規ファイル', command: '赤色で表示' },
+            { category: '作業状態', termJa: '変更あり', termEn: 'Modified', description: '編集されたファイル', command: 'git status で表示' },
+            { category: '作業状態', termJa: 'ステージ済み', termEn: 'Staged', description: 'コミット待ちの状態', command: 'git add 後の状態' },
+            { category: '作業状態', termJa: 'コミット済み', termEn: 'Committed', description: 'リポジトリに記録済み', command: '履歴に残っている' },
+            { category: '作業状態', termJa: 'クリーン', termEn: 'Clean', description: '変更がない状態', command: 'nothing to commit, working tree clean' },
+            { category: '作業状態', termJa: 'ダーティ', termEn: 'Dirty', description: '未コミットの変更がある状態', command: 'コミットまたは破棄が必要' },
+            
+            // その他
+            { category: 'その他', termJa: '差分', termEn: 'Diff', description: 'ファイルの変更内容', command: 'git diff' },
+            { category: 'その他', termJa: 'ログ', termEn: 'Log', description: 'コミット履歴', command: 'git log' },
+            { category: 'その他', termJa: 'スタッシュ', termEn: 'Stash', description: '変更を一時退避', command: 'git stash' },
+            { category: 'その他', termJa: 'タグ', termEn: 'Tag', description: '特定のコミットに名前を付ける', command: 'git tag v1.0.0' },
+            { category: 'その他', termJa: 'リセット', termEn: 'Reset', description: 'コミットを取り消す', command: 'git reset HEAD~1' },
+            { category: 'その他', termJa: 'リバート', termEn: 'Revert', description: 'コミットを打ち消す新しいコミット', command: 'git revert a3f5b21' },
+            { category: 'その他', termJa: 'ブレーム', termEn: 'Blame', description: '各行の最終更新者を表示', command: 'git blame file.txt' },
+            { category: 'その他', termJa: 'リフログ', termEn: 'Reflog', description: 'HEADの移動履歴', command: 'git reflog' },
+            { category: 'その他', termJa: 'サブモジュール', termEn: 'Submodule', description: '別リポジトリを含める', command: 'git submodule add <URL>' },
+            { category: 'その他', termJa: 'ワークフロー', termEn: 'Workflow', description: '開発の流れ・ルール', command: 'Git Flow, GitHub Flowなど' },
+        ];
+
+        // テーブルを表示
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = gitTermsData.map(term => `
+                <tr>
+                    <td class="category">${term.category}</td>
+                    <td><strong>${term.termJa}</strong></td>
+                    <td>${term.termEn}</td>
+                    <td>${term.description}</td>
+                    <td><code>${term.command}</code></td>
+                </tr>
+            `).join('');
+        }
+
+        // Excelエクスポート
+        function exportToExcel() {
+            const ws = XLSX.utils.json_to_sheet(gitTermsData.map(term => ({
+                'カテゴリ': term.category,
+                '用語（日本語）': term.termJa,
+                '用語（英語）': term.termEn,
+                '説明': term.description,
+                'コマンド例': term.command
+            })));
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Git用語集');
+
+            // 列幅を調整
+            ws['!cols'] = [
+                { wch: 15 },
+                { wch: 25 },
+                { wch: 30 },
+                { wch: 40 },
+                { wch: 35 }
+            ];
+
+            XLSX.writeFile(wb, 'Git用語集.xlsx');
+        }
+
+        // CSVエクスポート
+        function exportToCSV() {
+            const csv = [
+                ['カテゴリ', '用語（日本語）', '用語（英語）', '説明', 'コマンド例'],
+                ...gitTermsData.map(term => [
+                    term.category,
+                    term.termJa,
+                    term.termEn,
+                    term.description,
+                    term.command
+                ])
+            ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+
+            const bom = '\uFEFF';
+            const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'Git用語集.csv';
+            link.click();
+        }
+
+        // ページ読み込み時にテーブルを表示
+        renderTable();
+    </script>
+</body>
+</html>
