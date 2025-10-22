@@ -1,0 +1,268 @@
+# Git用語集 - 完全ガイド
+
+## 📚 目次
+1. [基本概念](#基本概念)
+2. [リポジトリ関連](#リポジトリ関連)
+3. [ブランチ関連](#ブランチ関連)
+4. [コミット関連](#コミット関連)
+5. [リモート操作](#リモート操作)
+6. [マージ・統合](#マージ統合)
+7. [作業状態](#作業状態)
+8. [その他の重要用語](#その他の重要用語)
+
+---
+
+## 基本概念
+
+| 用語 | 英語 | 説明 | 使用例 |
+|------|------|------|--------|
+| **リポジトリ** | Repository | プロジェクトの履歴を保存する場所 | `git init`でリポジトリ作成 |
+| **ローカルリポジトリ** | Local Repository | 自分のPC上のリポジトリ | 開発作業はローカルで行う |
+| **リモートリポジトリ** | Remote Repository | サーバー上の共有リポジトリ | GitHub, GitLabなど |
+| **クローン** | Clone | リモートリポジトリをローカルにコピー | `git clone <URL>` |
+| **ワークツリー** | Working Tree | 実際にファイルを編集する作業領域 | エディタで編集する場所 |
+| **ステージングエリア** | Staging Area / Index | コミット前の準備領域 | `git add`で追加 |
+
+---
+
+## リポジトリ関連
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **初期化** | Initialize | 新しいGitリポジトリを作成 | `git init` |
+| **クローン** | Clone | リポジトリを複製 | `git clone https://github.com/user/repo.git` |
+| **フォーク** | Fork | 他人のリポジトリを自分のアカウントにコピー | GitHub上でボタンクリック |
+| **オリジン** | Origin | デフォルトのリモートリポジトリ名 | `git remote add origin <URL>` |
+| **アップストリーム** | Upstream | フォーク元のリポジトリ | `git remote add upstream <URL>` |
+
+---
+
+## ブランチ関連
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **ブランチ** | Branch | 開発の枝分かれ | `git branch feature-login` |
+| **メインブランチ** | Main Branch | 本番環境のコード（旧master） | `main` または `master` |
+| **開発ブランチ** | Development Branch | 開発用のブランチ | `develop` |
+| **フィーチャーブランチ** | Feature Branch | 新機能開発用のブランチ | `feature/user-auth` |
+| **バグ修正ブランチ** | Bugfix Branch | バグ修正用 | `bugfix/login-error` |
+| **ホットフィックスブランチ** | Hotfix Branch | 緊急修正用 | `hotfix/security-patch` |
+| **リリースブランチ** | Release Branch | リリース準備用 | `release/v1.2.0` |
+| **トピックブランチ** | Topic Branch | 特定の作業用ブランチの総称 | - |
+| **作業ブランチ** | Working Branch | 現在作業中のブランチ | `git branch`で確認 |
+| **デフォルトブランチ** | Default Branch | リポジトリの基準となるブランチ | 通常は`main` |
+
+### ブランチ命名規則の例
+
+| 種類 | プレフィックス | 例 |
+|------|---------------|-----|
+| 新機能 | `feature/` | `feature/user-profile` |
+| バグ修正 | `bugfix/` または `fix/` | `bugfix/payment-error` |
+| ホットフィックス | `hotfix/` | `hotfix/critical-security` |
+| リリース | `release/` | `release/v2.0.0` |
+| 実験 | `experiment/` | `experiment/new-ui` |
+| ドキュメント | `docs/` | `docs/update-readme` |
+| リファクタリング | `refactor/` | `refactor/optimize-db` |
+
+---
+
+## コミット関連
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **コミット** | Commit | 変更を記録する | `git commit -m "メッセージ"` |
+| **コミットメッセージ** | Commit Message | コミットの説明文 | `git commit -m "Add login feature"` |
+| **コミットハッシュ** | Commit Hash / SHA | コミットを識別する一意のID | `a3f5b21...` |
+| **HEAD** | HEAD | 現在のコミット位置を指すポインタ | `git log HEAD` |
+| **スナップショット** | Snapshot | ある時点のファイル状態 | コミット時に作成される |
+| **修正コミット** | Amend | 直前のコミットを修正 | `git commit --amend` |
+| **空コミット** | Empty Commit | ファイル変更なしのコミット | `git commit --allow-empty` |
+
+---
+
+## リモート操作
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **プッシュ** | Push | ローカルの変更をリモートへ送信 | `git push origin main` |
+| **プル** | Pull | リモートの変更をローカルへ取得・統合 | `git pull origin main` |
+| **フェッチ** | Fetch | リモートの変更を取得（統合しない） | `git fetch origin` |
+| **リモート** | Remote | リモートリポジトリの接続設定 | `git remote -v` |
+| **プルリクエスト** | Pull Request (PR) | コードレビュー・統合の依頼 | GitHub/GitLab上で作成 |
+| **マージリクエスト** | Merge Request (MR) | プルリクエストのGitLab用語 | GitLab上で作成 |
+
+---
+
+## マージ・統合
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **マージ** | Merge | ブランチを統合 | `git merge feature-branch` |
+| **ファストフォワード** | Fast-forward | 直線的なマージ | `git merge --ff` |
+| **マージコミット** | Merge Commit | マージ時に作成されるコミット | 自動生成 |
+| **リベース** | Rebase | コミット履歴を書き換えて統合 | `git rebase main` |
+| **スカッシュ** | Squash | 複数コミットを1つにまとめる | `git rebase -i HEAD~3` |
+| **チェリーピック** | Cherry-pick | 特定のコミットだけを取り込む | `git cherry-pick a3f5b21` |
+| **コンフリクト** | Conflict | マージ時の衝突 | 手動で解決が必要 |
+| **コンフリクト解決** | Conflict Resolution | 衝突の解決作業 | ファイルを編集して解決 |
+
+---
+
+## 作業状態
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **追跡中** | Tracked | Gitが管理しているファイル | `git status`で確認 |
+| **未追跡** | Untracked | Gitが管理していない新規ファイル | 赤色で表示 |
+| **変更あり** | Modified | 編集されたファイル | `git status`で表示 |
+| **ステージ済み** | Staged | コミット待ちの状態 | `git add`後の状態 |
+| **コミット済み** | Committed | リポジトリに記録済み | 履歴に残っている |
+| **クリーン** | Clean | 変更がない状態 | `nothing to commit, working tree clean` |
+| **ダーティ** | Dirty | 未コミットの変更がある状態 | コミットまたは破棄が必要 |
+
+---
+
+## その他の重要用語
+
+| 用語 | 英語 | 説明 | コマンド例 |
+|------|------|------|-----------|
+| **差分** | Diff | ファイルの変更内容 | `git diff` |
+| **ログ** | Log | コミット履歴 | `git log` |
+| **スタッシュ** | Stash | 変更を一時退避 | `git stash` |
+| **タグ** | Tag | 特定のコミットに名前を付ける | `git tag v1.0.0` |
+| **リセット** | Reset | コミットを取り消す | `git reset HEAD~1` |
+| **リバート** | Revert | コミットを打ち消す新しいコミット | `git revert a3f5b21` |
+| **ブレーム** | Blame | 各行の最終更新者を表示 | `git blame file.txt` |
+| **リフログ** | Reflog | HEADの移動履歴 | `git reflog` |
+| **サブモジュール** | Submodule | 別リポジトリを含める | `git submodule add <URL>` |
+| **ワークフロー** | Workflow | 開発の流れ・ルール | Git Flow, GitHub Flowなど |
+| **フック** | Hook | Gitイベント時の自動実行スクリプト | `.git/hooks/` |
+| **ベアリポジトリ** | Bare Repository | 作業ツリーを持たないリポジトリ | サーバー用 |
+
+---
+
+## 特殊な記号・表記
+
+| 記号 | 意味 | 使用例 |
+|------|------|--------|
+| `HEAD` | 現在のコミット位置 | `git reset HEAD~1` |
+| `HEAD~1` | 1つ前のコミット | `HEAD~2`で2つ前 |
+| `HEAD^` | 1つ前のコミット（同上） | `HEAD^^`で2つ前 |
+| `origin` | デフォルトのリモート名 | `git push origin main` |
+| `master` / `main` | メインブランチ名 | GitHubは`main`に移行中 |
+| `..` | コミット範囲 | `git log main..feature` |
+| `...` | 対称差分 | `git log main...feature` |
+| `@` | HEADの省略記法 | `git show @` |
+| `-` | 直前のブランチ | `git checkout -` |
+
+---
+
+## Gitワークフロー
+
+### Git Flow
+
+| ブランチ | 用途 | 寿命 |
+|---------|------|------|
+| `main` | 本番環境 | 永続 |
+| `develop` | 開発統合 | 永続 |
+| `feature/*` | 新機能開発 | 一時的 |
+| `release/*` | リリース準備 | 一時的 |
+| `hotfix/*` | 緊急修正 | 一時的 |
+
+### GitHub Flow
+
+| ブランチ | 用途 |
+|---------|------|
+| `main` | 常にデプロイ可能な状態 |
+| `feature/*` | 全ての作業用ブランチ |
+
+---
+
+## よく使うコマンド対応表
+
+| やりたいこと | コマンド |
+|-------------|---------|
+| 初めてリポジトリを作る | `git init` |
+| リモートから取得 | `git clone <URL>` |
+| ブランチ作成 | `git branch <name>` |
+| ブランチ切り替え | `git checkout <name>` |
+| ブランチ作成＋切り替え | `git checkout -b <name>` |
+| 変更をステージ | `git add .` |
+| コミット | `git commit -m "message"` |
+| リモートに送信 | `git push origin <branch>` |
+| リモートから取得 | `git pull origin <branch>` |
+| 状態確認 | `git status` |
+| 履歴確認 | `git log` |
+| ブランチ一覧 | `git branch` |
+| リモート一覧 | `git remote -v` |
+| 差分確認 | `git diff` |
+| 変更を一時退避 | `git stash` |
+| 退避から戻す | `git stash pop` |
+| マージ | `git merge <branch>` |
+
+---
+
+## 状態遷移図
+
+```
+[未追跡]      [追跡済み]
+   |              |
+   | git add      | 編集
+   v              v
+[ステージ済み] [変更あり]
+   |              |
+   |              | git add
+   v              v
+[コミット待ち] ←───┘
+   |
+   | git commit
+   v
+[コミット済み]
+   |
+   | git push
+   v
+[リモートに反映]
+```
+
+---
+
+## 用語の日英対応表
+
+| 日本語 | 英語 |
+|--------|------|
+| リポジトリ | Repository |
+| ブランチ | Branch |
+| コミット | Commit |
+| プッシュ | Push |
+| プル | Pull |
+| マージ | Merge |
+| クローン | Clone |
+| フォーク | Fork |
+| プルリクエスト | Pull Request |
+| コンフリクト | Conflict |
+| ステージング | Staging |
+| チェックアウト | Checkout |
+| リベース | Rebase |
+| スタッシュ | Stash |
+| タグ | Tag |
+
+---
+
+## まとめ
+
+この用語集は、Gitを使った開発で頻繁に登場する用語をカバーしています。
+
+**初心者が最初に覚えるべき用語：**
+- リポジトリ、ブランチ、コミット
+- プッシュ、プル、マージ
+- ステージング、HEAD
+
+**中級者向けの用語：**
+- リベース、スカッシュ、チェリーピック
+- スタッシュ、タグ、コンフリクト解決
+
+**上級者向けの用語：**
+- リフログ、サブモジュール、フック
+- ベアリポジトリ、ワークフロー
+
+この用語集を参考に、Gitを使った効率的な開発を進めてください！
